@@ -4,11 +4,8 @@ body { font-family: Arial, sans-serif; line-height: 1.6; background: #f8f9fa; co
 a { text-decoration: none; color: inherit; }
 img { max-width: 100%; display: block; }
 
-/* Header & Navigation */
-header { background: #0d47a1; color: #fff; text-align: center; padding: 20px 0; position: sticky; top: 0; z-index: 1000; }
-nav ul { list-style: none; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
-nav ul li a { color: #fff; font-weight: bold; transition: 0.3s; }
-nav ul li a:hover { color: #ffcc00; }
+/* Header & Navigation (consolidated further down) */
+/* initial header rules removed to avoid duplication; final header block includes sticky positioning */
 
 /* Hero Banner */
 .hero { background: url('images/hero-banner.jpg') no-repeat center/cover; height: 70vh; display: flex; align-items: center; justify-content: center; color: #fff; text-align: center; }
@@ -87,7 +84,6 @@ footer { background: #0d47a1; color: #fff; text-align: center; padding: 20px 0; 
 
 .arrow.left { left: 20px; }
 .arrow.right { right: 20px; }
-/* style.css */
 
 /* Basic Reset */
 * {
@@ -99,38 +95,6 @@ footer { background: #0d47a1; color: #fff; text-align: center; padding: 20px 0; 
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
-}
-
-/* Header */
-header {
-  background-color: #004080;
-  color: #fff;
-  padding: 15px 20px;
-  text-align: center;
-}
-
-header h1 {
-  font-size: 28px;
-  margin-bottom: 10px;
-}
-
-header nav ul {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 15px;
-}
-
-header nav ul li a {
-  color: #fff;
-  text-decoration: none;
-  padding: 5px 10px;
-}
-
-header nav ul li a:hover {
-  background-color: #003366;
-  border-radius: 5px;
 }
 
 /* Hero Section */
@@ -193,15 +157,6 @@ section a:hover {
   background-color: #003366;
 }
 
-/* Footer */
-footer {
-  background-color: #004080;
-  color: #fff;
-  text-align: center;
-  padding: 15px 20px;
-  margin-top: 50px;
-}
-
 /* Media Queries for Mobile */
 @media (max-width: 768px) {
   header h1 {
@@ -240,7 +195,8 @@ footer {
     gap: 10px;
   }
 }
-/* Header and Logo */
+
+/* Header and Logo (consolidated header styles) */
 header {
   display: flex;
   justify-content: space-between;
@@ -249,6 +205,13 @@ header {
   background: #003366;
   color: #fff;
   flex-wrap: wrap;
+  position: fixed; /* keep header fixed at top */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10000; /* higher so it stays above overlays */
+  width: 100%;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
 header .logo {
@@ -297,95 +260,92 @@ nav a:hover {
     justify-content: center;
   }
 }
-/* Google Map Styling */
-.map-container {
-  width: 100%;
-  height: 400px;
-  margin-top: 20px;
-  border-radius: 10px;
-  overflow: hidden;
+
+/* Hamburger / mobile-nav styles */
+.mobile-menu {
+  display: none; /* hidden on larger screens */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  margin-right: 8px;
+}
+.mobile-menu:focus { outline: 2px solid #00bfff; }
+.hamburger-line {
+  display: block;
+  width: 24px;
+  height: 3px;
+  background: #fff;
+  margin: 4px 0;
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
-.map-container iframe {
-  width: 100%;
-  height: 100%;
-  border: 0;
+/* Hamburger open -> X animation */
+.mobile-menu.open .hamburger-line {
+  background: #fff;
+}
+.mobile-menu.open .hamburger-line:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.mobile-menu.open .hamburger-line:nth-child(2) {
+  opacity: 0;
+  transform: translateX(-10px);
+}
+.mobile-menu.open .hamburger-line:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
-/* Responsive fix for map */
+/* Use .nav-list as the primary nav list (was nav ul) */
+.nav-list { display: flex; gap: 20px; align-items: center; }
+
+/* Active state when mobile menu toggles */
+.nav-list.active {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  text-align: center;
+  padding: 12px 0;
+  background: #002244;
+}
+
 @media (max-width: 768px) {
-  .map-container {
-    height: 300px;
-  }
-}
-/* --- Specialties Section --- */
-#specialties {
-  padding: 40px 20px;
-  background: #f9f9f9;
-  text-align: center;
+  .mobile-menu { display: block; }
+  /* initially hide the nav-list on small screens, show when .active is present */
+  .nav-list { display: none; }
 }
 
-#specialties h2 {
-  font-size: 2em;
-  color: #003366;
-  margin-bottom: 25px;
-}
-
-.specialties-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 20px;
-  justify-items: center;
-}
-
-.specialty-card {
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+/* Skip link for keyboard users */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
   overflow: hidden;
-  transition: transform 0.3s, box-shadow 0.3s;
-  width: 100%;
-  max-width: 250px;
 }
-
-.specialty-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-}
-
-.specialty-card img {
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
-}
-
-.specialty-card h3 {
-  margin: 12px 0;
-  font-size: 1.1em;
+.skip-link:focus {
+  position: fixed;
+  left: 8px;
+  top: 8px;
+  width: auto;
+  height: auto;
+  padding: 8px 12px;
+  background: #fff;
   color: #003366;
-}
-/* --- Location Section --- */
-#location {
-  background: #f9f9f9;
-  padding: 50px 20px;
-  text-align: center;
+  z-index: 9999;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
-#location h2 {
-  font-size: 2em;
-  color: #003366;
-  margin-bottom: 15px;
+/* Visible focus styles for interactive elements */
+a:focus, button:focus, input:focus, textarea:focus {
+  outline: 3px solid #00bfff;
+  outline-offset: 2px;
 }
 
-#location p {
-  max-width: 700px;
-  margin: 0 auto 30px;
-  color: #333;
-  line-height: 1.6;
-  font-size: 1.05em;
-}
-
-/* Map container styling */
+/* Google Map Styling */
 .map-container {
   position: relative;
   width: 100%;
@@ -419,74 +379,8 @@ nav a:hover {
     height: 320px;
   }
 }
-#location {
-  background: #f9f9f9;
-  padding: 60px 20px;
-  text-align: center;
-}
-
-#location h2 {
-  font-size: 2em;
-  color: #003366;
-  margin-bottom: 15px;
-}
-
-#location p {
-  max-width: 700px;
-  margin: 0 auto 25px;
-  color: #444;
-  line-height: 1.6;
-  font-size: 1.05em;
-}
-
-.map-container {
-  position: relative;
-  width: 100%;
-  max-width: 900px;
-  height: 420px;
-  margin: 0 auto;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.map-container iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-}
-
-/* Directions button */
-.directions-btn {
-  display: inline-block;
-  margin-top: 20px;
-  background: #003366;
-  color: white;
-  padding: 12px 25px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: background 0.3s;
-}
-
-.directions-btn:hover {
-  background: #0055aa;
-}
-
-/* Mobile adjustments */
-@media (max-width: 768px) {
-  #location h2 {
-    font-size: 1.6em;
-  }
-  #location p {
-    font-size: 0.95em;
-    padding: 0 10px;
-  }
-  .map-container {
-    height: 320px;
-  }
-}
 
 .active {
      color: #ffcc00;
 }
+
