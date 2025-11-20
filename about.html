@@ -8,23 +8,32 @@
 </head>
 <body>
 
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
 <header>
   <div class="logo">
     <img src="images/gata-logo.png" alt="GATA Engineering Services Ltd Logo">
     <h1>GATA Engineering Services Ltd</h1>
   </div>
   <nav>
-    <ul>
+    <!-- Mobile hamburger button -->
+    <button id="mobile-menu" class="mobile-menu" aria-label="Toggle navigation" aria-expanded="false" aria-controls="main-nav">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+    <ul id="main-nav" class="nav-list">
       <li><a href="index.html">Home</a></li>
       <li><a href="about.html" class="active">About</a></li>
       <li><a href="services.html">Services</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
-  </nav>
-</header>
+    </nav>
+  </header>
 
+  <main id="main-content">
 
-<section class="hero" style="background-image:url('images/about-hero.jpg');">
+  <section class="hero" style="background-image:url('images/about-hero.jpg');">
   <h1>About GATA Engineering Services</h1>
 </section>
 
@@ -50,7 +59,9 @@
 
 </section>
 
-<footer>
+  </main>
+
+  <footer>
   &copy; 2025 GATA Engineering Services Ltd — Founded 2012 — Designed by Mathew.
 </footer>
 
@@ -63,5 +74,6 @@
 <script src="script.js"></script>
 </body>
 </html>
+
 
 
