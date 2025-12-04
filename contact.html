@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GATA Engineering Services Ltd | Contact</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+<header>
+  <div class="logo">
+    <img src="images/gata-logo.png" alt="GATA Engineering Services Ltd Logo">
+    <h1>GATA Engineering Services Ltd</h1>
+  </div>
+  <nav>
+    <!-- Mobile hamburger button -->
+    <button id="mobile-menu" class="mobile-menu" aria-label="Toggle navigation" aria-expanded="false" aria-controls="main-nav">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+    <ul id="main-nav" class="nav-list">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+<section class="hero" style="background-image:url('images/services-hero.jpg');">
+  <h1>Contact Us</h1>
+</section>
+
+<main id="main-content">
+
+<section id="contact">
+  <h2>Get in Touch</h2>
+  <form class="contact-form" onsubmit="sendWhatsApp(); return false;">
+    <label for="name">Your Name</label>
+    <input type="text" id="name" placeholder="Your Name" required>
+
+    <label for="email">Your Email</label>
+    <input type="email" id="email" placeholder="Your Email" required>
+
+    <label for="message">Your Message</label>
+    <textarea id="message" placeholder="Your Message" rows="5" required></textarea>
+
+    <button type="submit">Send via WhatsApp</button>
+  </form>
+
+  <div class="social-links">
+    <a href="https://wa.me/256757315386" target="_blank" rel="noopener noreferrer">
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" alt="WhatsApp">
+      Chat on WhatsApp
+    </a>
+    <a href="https://www.tiktok.com/@hikmah_cakes" target="_blank" rel="noopener noreferrer">
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg" alt="TikTok">
+      Visit TikTok
+    </a>
+  </div>
+</section>
+
+<section id="location">
+  <h2>Our Location</h2>
+  <p>
+    Visit <strong>GATA Engineering Services Ltd</strong> at our office on 
+    <strong>Mulondo Road, Wandegeya, Kampala, Uganda</strong>.  
+    We’re right in the heart of the city — easy to find and ready to serve you.
+  </p>
+
+  <div class="map-container">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.748604912348!
+      2d32.56745377496444!3d0.336377599659593!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.
+      1!3m3!1m2!1s0x177dbc7337acb2c3%3A0xf6f0d2f4291ec3f8!2sGATA%20Engineering%20Services%20Ltd!
+      5e0!3m2!1sen!2sug!4v1731255592000!5m2!1sen!2sug"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+
+  <a class="directions-btn" 
+     href="https://www.google.com/maps/dir/?api=1&destination=GATA+Engineering+Services+Ltd,+Mulondo+Road,+Wandegeya,+Kampala,+Uganda" 
+     target="_blank">
+    📍 Get Directions on Google Maps
+  </a>
+</section>
+
+
+
+<footer>
+  &copy; 2025 GATA Engineering Services Ltd — Founded 2012 — Designed by Mathew.
+</footer>
+
+
+<script src="script.js"></script>
+<script>
+function sendWhatsApp() {
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const message = document.getElementById("message").value.trim();
+  if(!name || !email || !message){
+    alert("Please fill all fields before sending.");
+    return;
+  }
+  const text = `Hello, I am ${name} (${email}). ${message}`;
+  const phoneNumber = "256757315386";
+  window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(text)}`, "_blank");
+}
+</script>
+</body>
+</html>
+
